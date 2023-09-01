@@ -1,4 +1,3 @@
-
 import "./App.css";
 
 import { useState, useEffect } from "react";
@@ -31,11 +30,13 @@ function App() {
   function deleteReservation(id) {
     fetch(`${ENDPOINT}/${id}`, {
       method: "DELETE",
-    }).then(() => getReservation());
+    })
+      .then(() => getReservation())
+      .then(() => alert("Deletion successful")); //When the deletion is successful, inform user with alert
   }
 
   function postReservation(e) {
-    e.preventDefault();
+    e.preventDefault(); //prevent default so the page doesn't cause a refresh every time the post form is submitted
     console.log(newReservationName, newRoomNumber, newStayLength);
 
     fetch(ENDPOINT, {
@@ -46,7 +47,9 @@ function App() {
         roomNumber: newRoomNumber,
         stayLength: newStayLength,
       }),
-    }).then(() => getReservation());
+    })
+      .then(() => getReservation())
+      .then(() => alert("Reservation creation successful")); //When posting is successful, inform user with alert
   }
 
   function updateReservation(e, reservationObj) {
@@ -63,7 +66,9 @@ function App() {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedReservationObj),
-    }).then(() => getReservation());
+    })
+      .then(() => getReservation())
+      .then(() => alert("Reservation update successful")); //When the update is successful, inform the user with an alert
   }
 
   return (
